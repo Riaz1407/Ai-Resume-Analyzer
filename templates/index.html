@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+
+AI Resume Analyzer Pro
+
+</title>
+
+<link
+
+rel="stylesheet"
+
+href="{{ url_for('static',filename='style.css') }}"
+
+>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+
+🤖 AI Resume Analyzer Pro
+
+</h1>
+
+<p class="subtitle">
+
+ATS Score • Job Match • Cover Letter • Interview Questions
+
+</p>
+
+
+
+<form
+
+action="/analyze"
+
+method="POST"
+
+enctype="multipart/form-data"
+
+>
+
+<div class="upload-box">
+
+<h2>
+
+📄 Upload Resume
+
+</h2>
+
+<p>
+
+Upload PDF Resume
+
+</p>
+
+
+
+<input
+
+type="file"
+
+name="resume"
+
+accept=".pdf"
+
+required
+
+>
+
+
+
+<textarea
+
+name="job_description"
+
+placeholder="Paste Job Description Here"
+
+required
+
+></textarea>
+
+
+
+<button>
+
+Analyze Resume
+
+</button>
+
+</div>
+
+</form>
+
+
+
+
+
+{% if result %}
+
+
+
+<div class="score-grid">
+
+
+
+<div class="score-card">
+
+<h2>
+
+ATS Score
+
+</h2>
+
+<div class="score">
+
+{{result.ats_score}}%
+
+</div>
+
+</div>
+
+
+
+
+<div class="score-card">
+
+<h2>
+
+Job Match
+
+</h2>
+
+<div class="score">
+
+{{result.job_match}}%
+
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+ Resume Summary
+
+</h2>
+
+<p>
+
+{{result.summary}}
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+✅ Strengths
+
+</h2>
+
+
+
+{% for item in result.strengths %}
+
+
+<div class="list-item">
+
+✔ {{item}}
+
+</div>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+❌ Weaknesses
+
+</h2>
+
+
+
+{% for item in result.weaknesses %}
+
+
+<div class="list-item">
+
+✖ {{item}}
+
+</div>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+🏷 Missing Skills
+
+</h2>
+
+
+
+{% for skill in result.missing_skills %}
+
+
+<span class="tag">
+
+{{skill}}
+
+</span>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+💡 Suggestions
+
+</h2>
+
+
+
+{% for item in result.suggestions %}
+
+
+<div class="list-item">
+
+{{item}}
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+📄 Cover Letter
+
+</h2>
+
+
+<p>
+
+{{result.cover_letter}}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+🎤 Interview Questions
+
+</h2>
+
+
+
+{% for item in result.interview_questions %}
+
+
+<div class="list-item">
+
+{{item}}
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>
+
+🚀 Learning Roadmap
+
+</h2>
+
+
+
+{% for item in result.roadmap %}
+
+
+<div class="list-item">
+
+{{item}}
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+{% endif %}
+
+
+
+
+
+</div>
+
+</body>
+
+</html>
